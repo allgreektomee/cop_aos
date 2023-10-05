@@ -3,6 +3,8 @@ package com.devcation.agtm.network
 import com.devcation.agtm.dataModel.agtmClass.AgtmClassDetailResult
 import com.devcation.agtm.dataModel.agtmClass.AgtmClassResult
 import com.devcation.agtm.dataModel.agtmClass.AgtmClassReviewResult
+import com.devcation.agtm.dataModel.like.LikesClassResult
+import com.devcation.agtm.dataModel.like.LikesWineResult
 import com.devcation.agtm.dataModel.user.Login
 import com.devcation.agtm.dataModel.user.MeResult
 import com.devcation.agtm.dataModel.user.SignUp
@@ -48,10 +50,19 @@ interface Api {
     @GET("api/v1/users/@{username}/reviews/class") // 사용자 작성 클래스
     suspend fun getUserClassReviews(@Path("username") username:String, @Query("page") page: Int) : List<AgtmClassReviewResult>
 
-    //Class
-    @GET("api/v1/class") // 사용자 정보
-    suspend fun getAgtmClass() : List<AgtmClassResult>
+    //users - like
+    @GET("api/v1/users/@{username}/likes/wine") // 사용자 좋아요 와인목록
+    suspend fun getUserWineLikes(@Path("username") username:String, @Query("page") page: Int) : List<LikesWineResult>
+    @GET("api/v1/users/@{username}/likes/class") // 사용자 좋아요
+    suspend fun getUserClassLikes(@Path("username") username:String, @Query("page") page: Int) : List<LikesClassResult>
 
-    @GET("api/v1/class/{id}") // 사용자 정보
+    //users - like클래스목록
+
+
+    //Class
+    @GET("api/v1/class")
+    suspend fun getAgtmClass(@Query("page") page: Int) : List<AgtmClassResult>
+
+    @GET("api/v1/class/{id}")
     suspend fun getAgtmClassDetail(@Path("id") id:Int) : AgtmClassDetailResult
 }

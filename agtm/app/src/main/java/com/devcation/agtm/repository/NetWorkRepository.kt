@@ -22,6 +22,12 @@ class NetWorkRepository {
     suspend fun getUserWineReviews(username: String, page: Int) = client.getUserWineReviews(username, page)
     suspend fun getUserClassReviews(username: String, page: Int) = client.getUserClassReviews(username, page)
 
-    suspend fun getAgtmClass() = client.getAgtmClass()
+    suspend fun getUserWineLikes(username: String, page: Int) = client.getUserWineLikes(username, page)
+
+    suspend fun getUserClassLikes(username: String, page: Int) = client.getUserClassLikes(username, page)
+
+
+
+    suspend fun getAgtmClass(page: Int) = client.getAgtmClass(page)
     suspend fun getAgtmClassDetail(id : Int) = client.getAgtmClassDetail(id)
 }

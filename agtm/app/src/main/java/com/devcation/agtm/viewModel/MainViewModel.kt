@@ -96,8 +96,22 @@ class MainViewModel : ViewModel() {
 //        Log.d("getWineDetail", wine.country.get("name").toString() )
     }
 
-    fun getAgtmClass() =  viewModelScope.launch {
-        val agtmClass = netWorkRepository.getAgtmClass()
+    fun getUserWineLikes(username: String, page: Int)  = viewModelScope.launch{
+        val like = netWorkRepository.getUserWineLikes(username, page)
+        Log.d("MainViewModel", like.toString())
+
+//        Log.d("getWineDetail", wine.country.get("name").toString() )
+    }
+
+    fun getUserClassLikes(username: String, page: Int)  = viewModelScope.launch{
+        val like = netWorkRepository.getUserClassLikes(username, page)
+        Log.d("MainViewModel", like.toString())
+
+//        Log.d("getWineDetail", wine.country.get("name").toString() )
+    }
+
+    fun getAgtmClass(page: Int) =  viewModelScope.launch {
+        val agtmClass = netWorkRepository.getAgtmClass(page)
         Log.d("MainViewModel", agtmClass.toString())
     }
 
