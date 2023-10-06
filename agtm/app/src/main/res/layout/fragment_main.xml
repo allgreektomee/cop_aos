@@ -230,7 +230,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="6dp"
-                                    android:text="Pick!"
+                                    android:text="New Wine Pick!"
                                     android:textAllCaps="false"
                                     android:textColor="#FFFFFF"
                                     android:textSize="20sp"
@@ -242,7 +242,7 @@
                                     android:id="@+id/textView6"
                                     android:layout_width="wrap_content"
                                     android:layout_height="20dp"
-                                    android:text="유저들이 추천한 와인 어때요?"
+                                    android:text="신상 와인 어때요?"
                                     android:textColor="#65666D"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintStart_toStartOf="parent" />

@@ -15,6 +15,12 @@ class NetWorkRepository {
 
 
 
+    suspend fun getWineType(type:String , page: Int) = client.getWineType(type, page)
+
+    suspend fun getWineRecommand(recommand:String , page: Int) = client.getWineRecommand(recommand, page)
+
+
+
 
     suspend fun login(login: Login) = client.login(login)
     suspend fun me() = client.me()

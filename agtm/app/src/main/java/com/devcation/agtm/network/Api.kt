@@ -23,6 +23,12 @@ interface Api {
     @GET("api/v1/wine/") // 와인 목록 ?page=1
     suspend fun getWine(@Query("page") page: Int) : List<WineResult>
 
+    @GET("api/v1/wine/type/@{type}") // 와인 종류별 목록
+    suspend fun getWineType(@Path("type") type:String, @Query("page") page: Int) : List<WineResult>
+
+    @GET("api/v1/wine/re/@{recommand}") // 와인 종류별 목록
+    suspend fun getWineRecommand(@Path("recommand") recommand:String, @Query("page") page: Int) : List<WineResult>
+
     @GET("api/v1/wine/{id}") // 와인 상세
     suspend fun getWineDetail(@Path("id") id:Int) : WineDetailResult
 

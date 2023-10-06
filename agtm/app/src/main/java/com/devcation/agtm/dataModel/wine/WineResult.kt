@@ -14,5 +14,6 @@ data class WineResult (
     val Alcohol : Double,
     val country :  Map<String, Any>,
     val is_owner : Boolean,
+    val is_liked: Boolean,
     val photos :List<PhotoResult>
 )

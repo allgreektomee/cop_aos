@@ -22,9 +22,24 @@ class MainViewModel : ViewModel() {
         get() = _mutableWineList
 
 
-    private var _mutableWineList2 = MutableLiveData<WineDetailResult>()
-    val liveWineList2 : LiveData<WineDetailResult>
-        get() = _mutableWineList2
+    private var _mutableWineList_recommad_1 = MutableLiveData<List<WineResult>>()
+    val liveWineList_recommand_1 : LiveData<List<WineResult>>
+        get() = _mutableWineList_recommad_1
+
+
+    private var _mutableWineList_recommad_2 = MutableLiveData<List<WineResult>>()
+    val liveWineList_recommand_2 : LiveData<List<WineResult>>
+        get() = _mutableWineList_recommad_2
+
+    private var _mutableWineList_recommad_3 = MutableLiveData<List<WineResult>>()
+    val liveWineList_recommand_3 : LiveData<List<WineResult>>
+        get() = _mutableWineList_recommad_3
+
+
+
+    private var _mutableWineDetail = MutableLiveData<WineDetailResult>()
+    val liveWineDetail : LiveData<WineDetailResult>
+        get() = _mutableWineDetail
 
 
     private var _mutableWineList3 = MutableLiveData<List<WineReviewResult>>()
@@ -40,14 +55,23 @@ class MainViewModel : ViewModel() {
         _mutableWineList.value = getWine
     }
 
+    fun getWineRecommand(recommand: String, page : Int) = viewModelScope.launch {
+        val getWine = netWorkRepository.getWineRecommand(recommand,page)
+        Log.d("MainViewModel", getWine.toString())
+        if(recommand == "agtm"){
+            _mutableWineList_recommad_1.value = getWine
+        }else if(recommand == "pick"){
+            _mutableWineList_recommad_2.value = getWine
+        }else if(recommand == "month"){
+            _mutableWineList_recommad_3.value = getWine
+        }
+
+    }
+
     fun getWineDetail(id : Int) = viewModelScope.launch{
         val wine = netWorkRepository.getWineDetail(id)
-        Log.d("MainViewModel", wine.toString())
-        Log.d("MainViewModel", wine.pairings[0].description)
-        Log.d("MainViewModel", wine.styles[0].description)
 
-//        Log.d("getWineDetail", wine.country.get("name").toString() )
-        _mutableWineList2.value = wine
+        _mutableWineDetail.value = wine
     }
 
     fun getWineReviews(id: Int, page: Int)  = viewModelScope.launch{
