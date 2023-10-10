@@ -8,13 +8,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.devcation.agtm.R
 import com.devcation.agtm.common.RecyclerViewDecoration
 import com.devcation.agtm.databinding.FragmentMainBinding
 import com.devcation.agtm.view.adapter.WineListVPAdapter
+import com.devcation.agtm.view.adapter.WineTypeGridAdapter
 import com.devcation.agtm.viewModel.MainViewModel
 import timber.log.Timber
+import java.util.Collections.list
 
 
 class MainFragment : Fragment() {
@@ -23,6 +26,7 @@ class MainFragment : Fragment() {
 
     private val viewModel : MainViewModel by activityViewModels()
 
+    val wineTypes = listOf(0,1,2,3,4,5)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,10 +53,10 @@ class MainFragment : Fragment() {
         viewModel.getWineRecommand("agtm",1)
         viewModel.liveWineList_recommand_1.observe(viewLifecycleOwner, Observer {
             val wineListRVAdapter = WineListVPAdapter(requireContext(), it)
-//            binding.wineListRecycler.addItemDecoration(RecyclerViewDecoration(20))
+
             binding.wineListRecycler.adapter = wineListRVAdapter
             binding.wineListRecycler.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-
+//            binding.wineListRecycler.addItemDecoration(RecyclerViewDecoration(0,0))
 
             wineListRVAdapter.itemClick = object : WineListVPAdapter.ItemClick {
                 override fun onClick(view: View, pk: Int) {
@@ -73,7 +77,7 @@ class MainFragment : Fragment() {
             val wineListRVAdapter = WineListVPAdapter(requireContext(), it)
             binding.wineListRecycler2.adapter = wineListRVAdapter
             binding.wineListRecycler2.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-//            binding.wineListRecycler2.addItemDecoration(RecyclerViewDecoration(20))
+//            binding.wineListRecycler2.addItemDecoration(RecyclerViewDecoration(20,0))
 
             wineListRVAdapter.itemClick = object : WineListVPAdapter.ItemClick {
                 override fun onClick(view: View, pk: Int) {
@@ -91,7 +95,7 @@ class MainFragment : Fragment() {
             val wineListRVAdapter = WineListVPAdapter(requireContext(), it)
             binding.wineListRecycler3.adapter = wineListRVAdapter
             binding.wineListRecycler3.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-//            binding.wineListRecycler3.addItemDecoration(RecyclerViewDecoration(20))
+//            binding.wineListRecycler3.addItemDecoration(RecyclerViewDecoration(20,0))
 
             wineListRVAdapter.itemClick = object : WineListVPAdapter.ItemClick {
                 override fun onClick(view: View, pk: Int) {
@@ -103,6 +107,17 @@ class MainFragment : Fragment() {
             }
         })
 
+        val wineTypeRVadapter = WineTypeGridAdapter(requireContext(), wineTypes )
+        binding.wineTypeRecycler.adapter = wineTypeRVadapter
+        binding.wineTypeRecycler.layoutManager = GridLayoutManager(requireContext(),3)
 
+        wineTypeRVadapter.itemClick = object : WineTypeGridAdapter.ItemClick {
+            override fun onClick(view: View, type: Int) {
+
+                val intent = Intent(requireContext(), WineTypeActivity::class.java)
+                intent.putExtra("type",type)
+                startActivity(intent)
+            }
+        }
     }
 }

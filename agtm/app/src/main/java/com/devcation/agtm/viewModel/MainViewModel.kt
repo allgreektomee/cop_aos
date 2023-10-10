@@ -37,6 +37,9 @@ class MainViewModel : ViewModel() {
 
 
 
+
+
+
     private var _mutableWineDetail = MutableLiveData<WineDetailResult>()
     val liveWineDetail : LiveData<WineDetailResult>
         get() = _mutableWineDetail
@@ -58,21 +61,23 @@ class MainViewModel : ViewModel() {
     fun getWineRecommand(recommand: String, page : Int) = viewModelScope.launch {
         val getWine = netWorkRepository.getWineRecommand(recommand,page)
         Log.d("MainViewModel", getWine.toString())
-        if(recommand == "agtm"){
-            _mutableWineList_recommad_1.value = getWine
-        }else if(recommand == "pick"){
-            _mutableWineList_recommad_2.value = getWine
-        }else if(recommand == "month"){
-            _mutableWineList_recommad_3.value = getWine
+
+        when (recommand) {
+            "agtm" -> _mutableWineList_recommad_1.value = getWine
+            "pick" -> _mutableWineList_recommad_2.value = getWine
+            "month" -> _mutableWineList_recommad_3.value = getWine
         }
 
     }
+
 
     fun getWineDetail(id : Int) = viewModelScope.launch{
         val wine = netWorkRepository.getWineDetail(id)
 
         _mutableWineDetail.value = wine
     }
+
+
 
     fun getWineReviews(id: Int, page: Int)  = viewModelScope.launch{
         val reviews = netWorkRepository.getWineReviews(id, page)
