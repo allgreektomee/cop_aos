@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.devcation.agtm.dataModel.agtmClass.AgtmClassDetailResult
 import com.devcation.agtm.dataModel.agtmClass.AgtmClassResult
+import com.devcation.agtm.dataModel.like.LikeType
 import com.devcation.agtm.dataModel.wine.WineResult
 import com.devcation.agtm.repository.NetWorkRepository
 import kotlinx.coroutines.launch
@@ -34,6 +35,14 @@ class ClassViewModel : ViewModel() {
         Log.d("MainViewModel", classDetail.toString())
 
         _mutableClass.value = classDetail
+    }
+
+
+    fun getAgtmClassLikeToggle(username:String, id: Int, type: LikeType)= viewModelScope.launch {
+        val classDetail = netWorkRepository.getAgtmClassLikeToggle(username, id, type)
+        Log.d("getAgtmClassLikeToggle", classDetail.toString())
+
+
     }
 
 }

@@ -1,5 +1,6 @@
 package com.devcation.agtm.repository
 
+import com.devcation.agtm.dataModel.like.LikeType
 import com.devcation.agtm.dataModel.user.SignIn
 import com.devcation.agtm.dataModel.user.SignUp
 import com.devcation.agtm.network.Api
@@ -24,7 +25,7 @@ class NetWorkRepository {
 
     suspend fun login(signIn: SignIn) = client.login(signIn)
     suspend fun logout() = client.logout()
-    suspend fun me() = client.me()
+    suspend fun me(username: String) = client.me(username)
     suspend fun signup(signup: SignUp) = client.signup(signup)
     suspend fun getUserWineReviews(username: String, page: Int) = client.getUserWineReviews(username, page)
     suspend fun getUserClassReviews(username: String, page: Int) = client.getUserClassReviews(username, page)
@@ -33,10 +34,17 @@ class NetWorkRepository {
 
     suspend fun getUserClassLikes(username: String, page: Int) = client.getUserClassLikes(username, page)
 
-
-
     suspend fun getAgtmClass(page: Int) = client.getAgtmClass(page)
     suspend fun getAgtmClassDetail(id : Int) = client.getAgtmClassDetail(id)
+
+
+
+    suspend fun getWineLikeToggle(username: String, id: Int, param: LikeType) = client.getWineLikeToggle(username, id, param)
+
+    suspend fun getAgtmClassLikeToggle(username: String, id: Int, param: LikeType) = client.getAgtmClassLikeToggle(username,  id, param)
+
+
+
 
     suspend fun getNoticeType(type : Int, page: Int) = client.getNoticeType(type, page)
 

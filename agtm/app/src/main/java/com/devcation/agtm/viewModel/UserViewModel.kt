@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.devcation.agtm.dataModel.user.SignIn
 import com.devcation.agtm.dataModel.user.SignUp
-import com.devcation.agtm.dataModel.user.SignResult
+import com.devcation.agtm.dataModel.DefaultResult
 import com.devcation.agtm.dataModel.wine.WineDetailResult
 import com.devcation.agtm.dataModel.wine.WineReviewResult
 import com.devcation.agtm.repository.NetWorkRepository
@@ -17,8 +17,8 @@ import kotlinx.coroutines.launch
 class UserViewModel : ViewModel() {
     private val netWorkRepository = NetWorkRepository()
 
-    private var _mutableSign = MutableLiveData<SignResult>()
-    val liveSign : LiveData<SignResult>
+    private var _mutableSign = MutableLiveData<DefaultResult>()
+    val liveSign : LiveData<DefaultResult>
         get() = _mutableSign
 
 
@@ -45,6 +45,7 @@ class UserViewModel : ViewModel() {
         val login = netWorkRepository.login(signInDto)
         Log.d("MainViewModel", login.toString())
 
+        _mutableSign.value = login
 
     }
     fun logout()= viewModelScope.launch{
@@ -56,8 +57,8 @@ class UserViewModel : ViewModel() {
     }
 
 
-    fun me() = viewModelScope.launch {
-        val me = netWorkRepository.me()
+    fun me(username: String) = viewModelScope.launch {
+        val me = netWorkRepository.me(username)
 
         Log.d("MainViewModel", me.toString())
     }
@@ -68,6 +69,37 @@ class UserViewModel : ViewModel() {
         _mutableSign.value = signup
     }
 
+
+
+
+    fun getUserWineReviews(username: String,page: Int)  = viewModelScope.launch{
+        val reviews = netWorkRepository.getUserWineReviews(username, page)
+        Log.d("MainViewModel", reviews.toString())
+
+//        Log.d("getWineDetail", wine.country.get("name").toString() )
+    }
+
+    fun getUserClassReviews(username: String,page: Int)  = viewModelScope.launch{
+        val reviews = netWorkRepository.getUserClassReviews(username, page)
+        Log.d("MainViewModel", reviews.toString())
+
+//        Log.d("getWineDetail", wine.country.get("name").toString() )
+    }
+
+
+    fun getUserWineLikes(username: String, page: Int)  = viewModelScope.launch{
+        val like = netWorkRepository.getUserWineLikes(username, page)
+        Log.d("MainViewModel", like.toString())
+
+//        Log.d("getWineDetail", wine.country.get("name").toString() )
+    }
+
+    fun getUserClassLikes(username: String, page: Int)  = viewModelScope.launch{
+        val like = netWorkRepository.getUserClassLikes(username, page)
+        Log.d("MainViewModel", like.toString())
+
+//        Log.d("getWineDetail", wine.country.get("name").toString() )
+    }
 
 
 }

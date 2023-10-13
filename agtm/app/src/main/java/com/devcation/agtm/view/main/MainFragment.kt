@@ -12,10 +12,12 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.devcation.agtm.R
 import com.devcation.agtm.common.RecyclerViewDecoration
+import com.devcation.agtm.dataModel.like.LikeType
 import com.devcation.agtm.databinding.FragmentMainBinding
 import com.devcation.agtm.view.adapter.WineListVPAdapter
 import com.devcation.agtm.view.adapter.WineTypeGridAdapter
 import com.devcation.agtm.viewModel.MainViewModel
+import com.devcation.agtm.viewModel.UserViewModel
 import timber.log.Timber
 import java.util.Collections.list
 
@@ -28,6 +30,7 @@ class MainFragment : Fragment() {
 
     val wineTypes = listOf(0,1,2,3,4,5)
 
+    private val userViewModel : UserViewModel by activityViewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -50,7 +53,13 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.me()
+//        userViewModel.me("devcation")
+//
+//        userViewModel.getUserWineReviews("devcation",1)
+
+
+
+        viewModel.getWineLikeToggle("devcation",1, LikeType("LIKE"))
 
         viewModel.getWineRecommand("agtm",1)
         viewModel.liveWineList_recommand_1.observe(viewLifecycleOwner, Observer {

@@ -10,7 +10,8 @@ import com.devcation.agtm.dataModel.notice.NoticeResult
 import com.devcation.agtm.dataModel.user.SignIn
 import com.devcation.agtm.dataModel.user.MeResult
 import com.devcation.agtm.dataModel.user.SignUp
-import com.devcation.agtm.dataModel.user.SignResult
+import com.devcation.agtm.dataModel.DefaultResult
+import com.devcation.agtm.dataModel.like.LikeType
 import com.devcation.agtm.dataModel.wine.WineResult
 import com.devcation.agtm.dataModel.wine.WineDetailResult
 import com.devcation.agtm.dataModel.wine.WineReviewResult
@@ -40,16 +41,16 @@ interface Api {
 
     //users
     @POST("api/v1/users/login") // 로그인
-    suspend fun login(@Body param : SignIn) : SignResult
+    suspend fun login(@Body param : SignIn) : DefaultResult
 
-    @GET("api/v1/users/me") // 사용자 정보
-    suspend fun me() : MeResult
+    @GET("api/v1/users/me/@{username}") // 사용자 정보
+    suspend fun me(@Path("username") username:String) : MeResult
 
     @POST("api/v1/users/logout") // 로그아웃
-    suspend fun logout() : SignResult
+    suspend fun logout() : DefaultResult
 
     @POST("api/v1/users/signup") // 회원가입
-    suspend fun signup(@Body param : SignUp) : SignResult
+    suspend fun signup(@Body param : SignUp) : DefaultResult
 
     //users - reivews
     @GET("api/v1/users/@{username}/reviews/wine") // 사용자 작성 와인리뷰
@@ -66,6 +67,11 @@ interface Api {
 
     //users - like클래스목록
 
+    @POST("api/v1/like/class/{id}/@{username}") // 토글 클래스
+    suspend fun getAgtmClassLikeToggle(@Path("username") username:String, @Path("id") id:Int, @Body param : LikeType) : DefaultResult
+
+    @POST("api/v1/like/wine/{id}/@{username}") //토글 와인
+    suspend fun getWineLikeToggle(@Path("username") username:String, @Path("id") id:Int, @Body param : LikeType) : DefaultResult
 
     //Class
     @GET("api/v1/class")
