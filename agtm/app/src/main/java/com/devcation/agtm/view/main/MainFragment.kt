@@ -50,6 +50,8 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.me()
+
         viewModel.getWineRecommand("agtm",1)
         viewModel.liveWineList_recommand_1.observe(viewLifecycleOwner, Observer {
             val wineListRVAdapter = WineListVPAdapter(requireContext(), it)

@@ -3,20 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav"
-    app:startDestination="@id/introFragment1">
+    app:startDestination="@id/introFragment">
 
     <fragment
-        android:id="@+id/introFragment1"
-        android:name="com.devcation.agtm.view.intro.IntroFragment1"
+        android:id="@+id/introFragment"
+        android:name="com.devcation.agtm.view.intro.IntroFragment"
         android:label="fragment_intro1"
-        tools:layout="@layout/fragment_intro1" >
+        tools:layout="@layout/fragment_intro" >
         <action
             android:id="@+id/action_introFragment1_to_introFragment2"
-            app:destination="@id/introFragment2" />
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
-        android:id="@+id/introFragment2"
-        android:name="com.devcation.agtm.view.intro.IntroFragment2"
+        android:id="@+id/loginFragment"
+        android:name="com.devcation.agtm.view.intro.LoginFragment"
         android:label="fragment_intro2"
-        tools:layout="@layout/fragment_intro2" />
+        tools:layout="@layout/fragment_login" />
 </navigation>

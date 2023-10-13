@@ -5,10 +5,12 @@ import com.devcation.agtm.dataModel.agtmClass.AgtmClassResult
 import com.devcation.agtm.dataModel.agtmClass.AgtmClassReviewResult
 import com.devcation.agtm.dataModel.like.LikesClassResult
 import com.devcation.agtm.dataModel.like.LikesWineResult
-import com.devcation.agtm.dataModel.user.Login
+import com.devcation.agtm.dataModel.notice.NoticeDetailResult
+import com.devcation.agtm.dataModel.notice.NoticeResult
+import com.devcation.agtm.dataModel.user.SignIn
 import com.devcation.agtm.dataModel.user.MeResult
 import com.devcation.agtm.dataModel.user.SignUp
-import com.devcation.agtm.dataModel.user.SignUpResult
+import com.devcation.agtm.dataModel.user.SignResult
 import com.devcation.agtm.dataModel.wine.WineResult
 import com.devcation.agtm.dataModel.wine.WineDetailResult
 import com.devcation.agtm.dataModel.wine.WineReviewResult
@@ -38,16 +40,16 @@ interface Api {
 
     //users
     @POST("api/v1/users/login") // 로그인
-    suspend fun login(@Body param : Login) : Map<String,Any>
+    suspend fun login(@Body param : SignIn) : SignResult
 
     @GET("api/v1/users/me") // 사용자 정보
     suspend fun me() : MeResult
 
     @POST("api/v1/users/logout") // 로그아웃
-    suspend fun logout() : Map<String,Any>
+    suspend fun logout() : SignResult
 
     @POST("api/v1/users/signup") // 회원가입
-    suspend fun signup(@Body param : SignUp) : SignUpResult
+    suspend fun signup(@Body param : SignUp) : SignResult
 
     //users - reivews
     @GET("api/v1/users/@{username}/reviews/wine") // 사용자 작성 와인리뷰
@@ -71,4 +73,20 @@ interface Api {
 
     @GET("api/v1/class/{id}")
     suspend fun getAgtmClassDetail(@Path("id") id:Int) : AgtmClassDetailResult
+
+    //Notice
+//    Noti = ("1", "Noti")
+//    Event = ("2", "Event")
+//    Magazine = ("3", "Magazine")
+//    Banner = ("4", "Banner")
+//    Link = ("5", "Link"),
+    @GET("api/v1/notice/type/{type}")
+    suspend fun getNoticeType(@Path("type") type:Int, @Query("page") page: Int) : List<NoticeResult>
+
+    @GET("api/v1/notice")
+    suspend fun getNotice( @Query("page") page: Int) : List<NoticeResult>
+
+    @GET("api/v1/notice/{id}")
+    suspend fun getNoticeDetail(@Path("id") id:Int) : NoticeDetailResult
+
 }

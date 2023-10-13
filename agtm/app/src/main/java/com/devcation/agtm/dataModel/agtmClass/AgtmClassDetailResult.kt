@@ -18,7 +18,7 @@ data class AgtmClassDetailResult (
     val owner : OwnerResult,
     val is_liked: Boolean,
     val photos : List<PhotoResult>,
-
+    val description : String,
         )
 
 

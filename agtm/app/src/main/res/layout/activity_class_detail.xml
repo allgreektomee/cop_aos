@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context=".view.main.WineDetailActivity">
+    tools:context=".view.notice.ClassDetailActivity">
+
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout7"
@@ -16,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
-            android:id="@+id/btn_wine_detail_back"
+            android:id="@+id/bcak"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginStart="24dp"
@@ -40,7 +42,7 @@
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout7">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/wineDetailLayout"
+            android:id="@+id/classDetailLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:layout_conversion_absoluteHeight="0dp"
@@ -49,7 +51,7 @@
             tools:layout_editor_absoluteY="44dp">
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/main_wine_card_img"
+                android:id="@+id/class_card_img"
                 android:layout_width="match_parent"
                 android:layout_height="280dp"
                 android:layout_marginStart="24dp"
@@ -64,127 +66,188 @@
 
 
                 <ImageView
-                    android:id="@+id/main_wine_detail_img"
+                    android:id="@+id/class_detail_img"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
                     tools:layout_conversion_absoluteHeight="0dp"
                     tools:layout_conversion_absoluteWidth="0dp" />
 
             </androidx.cardview.widget.CardView>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout11"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/class_card_img">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/class_owner_img_card"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/class_owner_img"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:scaleType="centerCrop"
+                        tools:srcCompat="@tools:sample/avatars" />
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/class_owner_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:ellipsize="end"
+                    android:text="TextView"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/class_owner_img_card"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/class_date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:ellipsize="end"
+                    android:text="TextView"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/class_owner_img_card"
+                    app:layout_constraintTop_toBottomOf="@+id/class_owner_name" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout9"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="0dp"
                 android:layout_marginEnd="24dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/main_wine_card_img">
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout11">
 
                 <ImageView
-                    android:id="@+id/main_wine_star1"
+                    android:id="@+id/class_star1"
                     android:layout_width="14dp"
                     android:layout_height="14dp"
+                    android:visibility="gone"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/star" />
 
                 <ImageView
-                    android:id="@+id/main_wine_star2"
+                    android:id="@+id/class_star2"
                     android:layout_width="14dp"
                     android:layout_height="14dp"
-                    app:layout_constraintStart_toEndOf="@+id/main_wine_star1"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toEndOf="@+id/class_star1"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/star" />
 
                 <ImageView
-                    android:id="@+id/main_wine_star3"
+                    android:id="@+id/class_star3"
                     android:layout_width="14dp"
                     android:layout_height="14dp"
-                    app:layout_constraintStart_toEndOf="@+id/main_wine_star2"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toEndOf="@+id/class_star2"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/star" />
 
                 <ImageView
-                    android:id="@+id/main_wine_star4"
+                    android:id="@+id/class_star4"
                     android:layout_width="14dp"
                     android:layout_height="14dp"
-                    app:layout_constraintStart_toEndOf="@+id/main_wine_star3"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toEndOf="@+id/class_star3"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/star" />
 
                 <ImageView
-                    android:id="@+id/main_wine_star5"
+                    android:id="@+id/class_star5"
                     android:layout_width="14dp"
                     android:layout_height="14dp"
-                    app:layout_constraintStart_toEndOf="@+id/main_wine_star4"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toEndOf="@+id/class_star4"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/star" />
 
                 <TextView
-                    android:id="@+id/main_wine_name"
+                    android:id="@+id/class_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="20dp"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:text="TextView"
+                    android:text="프랑스 자수 한달반"
                     android:textColor="#FFFFFF"
                     android:textSize="14sp"
-                    app:layout_constraintBottom_toTopOf="@+id/main_wine_name_en"
+                    app:layout_constraintBottom_toTopOf="@+id/class_subtitle"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
 
                 <TextView
-                    android:id="@+id/main_wine_name_en"
+                    android:id="@+id/class_subtitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:text="TextView"
+                    android:text="마크라메 와인 홀더"
                     android:textColor="#FFFFFF"
                     android:textSize="11sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/main_wine_name" />
+                    app:layout_constraintTop_toBottomOf="@+id/class_title" />
 
                 <TextView
-                    android:id="@+id/main_wine_country"
+                    android:id="@+id/class_place"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:text="프랑스 region graps"
+                    android:layout_marginTop="12dp"
+                    android:text="올그릭투미 - 신촌 서대문구 명물길34 1,2,3층"
                     android:textColor="#FFFFFF"
                     android:textSize="12sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/main_wine_name_en" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/class_subtitle" />
 
                 <TextView
-                    android:id="@+id/main_wine_cost"
+                    android:id="@+id/class_cost"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="3dp"
-                    android:text="45,000"
+                    android:text="13:00 - 18:00  35,000원"
                     android:textColor="#FFFFFFFF"
-                    android:textSize="18sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/main_wine_country" />
-
-                <TextView
-                    android:id="@+id/textView7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:text="원"
-                    android:textColor="#FFFFFF"
-                    app:layout_constraintStart_toEndOf="@+id/main_wine_cost"
-                    app:layout_constraintTop_toBottomOf="@+id/main_wine_country" />
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/class_place" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -192,55 +255,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="24dp"
                 android:layout_marginEnd="24dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout9">
 
-                <TextView
-                    android:id="@+id/tv_taste"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="바디 5/5  당도 5/5  산미 5/5  타닌 5/5"
-                    android:textColor="#FFFFFF"
-                    android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-
-                <TextView
-                    android:id="@+id/tvStyles"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="3dp"
-                    android:text="Styles"
-                    android:textColor="#FFFFFF"
-                    android:textSize="12sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_taste" />
-
-                <TextView
-                    android:id="@+id/tvPairings"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="3dp"
-                    android:text="Pairings"
-                    android:textColor="#FFFFFF"
-                    android:textSize="12sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvStyles" />
 
                 <TextView
                     android:id="@+id/tvDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
                     android:text="TextView TextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextView"
                     android:textColor="#FFFFFF"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvPairings" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -284,7 +314,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="23dp"
-            android:text="주문하기"
+            android:text="참여하기"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>

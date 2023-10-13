@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 
 
-data class Login (
+data class SignIn (
     @SerializedName("username")
     var username : String? = "",
 

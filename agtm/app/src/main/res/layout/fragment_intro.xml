@@ -4,13 +4,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".view.intro.IntroFragment2">
+    tools:context=".view.intro.IntroFragment">
+
+    <Button
+        android:id="@+id/loginBtn"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:background="@color/red"
+        android:text="로그인"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/nextBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="우리도\n알아보자"
-        android:gravity="center"
+        android:text="intro"
         android:textColor="@color/black"
         android:textSize="30dp"
         android:textStyle="bold"
@@ -21,13 +34,13 @@
 
     <Button
         android:id="@+id/nextBtn"
-        android:text="다음"
-        android:background="@color/red"
-        android:textColor="@color/white"
-        android:layout_marginBottom="200dp"
         android:layout_width="200dp"
-        android:textStyle="bold"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="200dp"
+        android:background="@color/red"
+        android:text="둘러보기"
+        android:textColor="@color/white"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

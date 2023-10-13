@@ -1,6 +1,6 @@
 package com.devcation.agtm.dataModel.user;
 
-data class SignUpResult (
+data class SignResult (
         val error :String,
-        val ok :String, // Welcome!
+        val ok :String, // 0000
 )

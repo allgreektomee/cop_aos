@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.devcation.agtm.dataModel.user.Login
+import com.devcation.agtm.dataModel.user.SignIn
 import com.devcation.agtm.dataModel.user.SignUp
 import com.devcation.agtm.dataModel.wine.WineResult
 import com.devcation.agtm.dataModel.wine.WineDetailResult
@@ -92,9 +92,9 @@ class MainViewModel : ViewModel() {
 
 
 
-    fun login(loginDto: Login)= viewModelScope.launch{
-        Log.d("MainViewModel", loginDto.toString())
-        val login = netWorkRepository.login(loginDto)
+    fun login(signInDto: SignIn)= viewModelScope.launch{
+        Log.d("MainViewModel", signInDto.toString())
+        val login = netWorkRepository.login(signInDto)
         Log.d("MainViewModel", login.toString())
 
 

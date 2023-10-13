@@ -6,11 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.marginRight
-import androidx.core.view.setMargins
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -32,9 +29,9 @@ class WineListVPAdapter(val context: Context, var dataSet: List<WineResult>) : R
     inner class ViewHolder(view : View) : RecyclerView.ViewHolder(view) {
         val wineImg = view.findViewById<ImageView>(R.id.main_wine_img)
 
-        val wineName = view.findViewById<TextView>(R.id.main_wine_name)
+        val wineName = view.findViewById<TextView>(R.id.item_class_subtitle)
 
-        val wineCountry = view.findViewById<TextView>(R.id.main_wine_country)
+        val wineCountry = view.findViewById<TextView>(R.id.item_class_place)
         val wineType = view.findViewById<TextView>(R.id.main_wine_type)
 
         var wineLike  = view.findViewById<ImageView>(R.id.wine_main_like)

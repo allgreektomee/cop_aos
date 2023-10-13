@@ -2,11 +2,6 @@ package com.devcation.agtm
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-import androidx.lifecycle.ViewModelProvider
-import com.devcation.agtm.databinding.ActivityMainBinding
-import com.devcation.agtm.dataModel.user.Login
-import com.devcation.agtm.dataModel.user.SignUp
-import com.devcation.agtm.viewModel.MainViewModel
 
 
 class _MainActivity : ComponentActivity() {

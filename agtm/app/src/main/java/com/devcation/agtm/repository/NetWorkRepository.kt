@@ -1,6 +1,6 @@
 package com.devcation.agtm.repository
 
-import com.devcation.agtm.dataModel.user.Login
+import com.devcation.agtm.dataModel.user.SignIn
 import com.devcation.agtm.dataModel.user.SignUp
 import com.devcation.agtm.network.Api
 import com.devcation.agtm.network.RetrofitInstance
@@ -22,7 +22,8 @@ class NetWorkRepository {
 
 
 
-    suspend fun login(login: Login) = client.login(login)
+    suspend fun login(signIn: SignIn) = client.login(signIn)
+    suspend fun logout() = client.logout()
     suspend fun me() = client.me()
     suspend fun signup(signup: SignUp) = client.signup(signup)
     suspend fun getUserWineReviews(username: String, page: Int) = client.getUserWineReviews(username, page)
@@ -36,4 +37,11 @@ class NetWorkRepository {
 
     suspend fun getAgtmClass(page: Int) = client.getAgtmClass(page)
     suspend fun getAgtmClassDetail(id : Int) = client.getAgtmClassDetail(id)
+
+    suspend fun getNoticeType(type : Int, page: Int) = client.getNoticeType(type, page)
+
+    suspend fun getNotice(page: Int) = client.getNotice(page)
+
+    suspend fun getNoticeDetail(id : Int) = client.getNoticeDetail(id)
+
 }

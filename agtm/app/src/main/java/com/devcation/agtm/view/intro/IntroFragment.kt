@@ -6,26 +6,31 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.devcation.agtm.databinding.FragmentIntro2Binding
-import com.devcation.agtm.view.SelectActivity
+import androidx.navigation.Navigation
+import com.devcation.agtm.R
+import com.devcation.agtm.databinding.FragmentIntroBinding
 
+import com.devcation.agtm.view.main.MainActivity
 
-class IntroFragment2 : Fragment() {
+// findViewById -> ViewBinding
 
-    private var _binding : FragmentIntro2Binding? = null
+class IntroFragment : Fragment() {
+
+    private var _binding : FragmentIntroBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-    }
+        }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _binding = FragmentIntro2Binding.inflate(inflater, container, false)
+        _binding = FragmentIntroBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -33,9 +38,17 @@ class IntroFragment2 : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.nextBtn.setOnClickListener {
-            val intent = Intent(requireContext(), SelectActivity::class.java)
+//            Navigation.findNavController(view).navigate(R.id.action_introFragment1_to_introFragment2)
+            val intent = Intent(requireContext(), MainActivity::class.java)
             startActivity(intent)
+        }
+
+        binding.loginBtn.setOnClickListener {
+            Navigation.findNavController(view).navigate(R.id.action_introFragment1_to_introFragment2)
+
         }
     }
 
+
 }
+
