@@ -30,11 +30,11 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView8"
+            android:id="@+id/textWishTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
-            android:text="올그릭투미"
+            android:text="관심있는 모든 와인"
             android:textAllCaps="false"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
@@ -47,7 +47,7 @@
             android:id="@+id/textView9"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
-            android:text="좋아할만한 와인을 추천드릴게요!"
+            android:text="나의 위시리스트와 주문 내역을 확인할 수 있어요. "
             android:textColor="#65666D"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -73,11 +73,11 @@
             android:text="ORDER"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
-            app:layout_constraintStart_toEndOf="@+id/btnWish"
+            app:layout_constraintStart_toEndOf="@+id/btnLike"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/btnWish"
+            android:id="@+id/btnLike"
             android:layout_width="60dp"
             android:layout_height="30dp"
             android:background="@color/black"
@@ -101,7 +101,7 @@
         app:layout_constraintTop_toBottomOf="@+id/likeTypeConstraintLayout">
 
         <Button
-            android:id="@+id/btnWinList"
+            android:id="@+id/btnWine"
             android:layout_width="60dp"
             android:layout_height="30dp"
             android:background="@drawable/round_shape_bg"
@@ -120,7 +120,7 @@
             android:text="클래스"
             android:textAlignment="center"
             android:textColor="#000000"
-            app:layout_constraintStart_toEndOf="@+id/btnWinList"
+            app:layout_constraintStart_toEndOf="@+id/btnWine"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

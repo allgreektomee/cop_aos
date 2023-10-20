@@ -12,6 +12,8 @@ import com.devcation.agtm.dataModel.user.MeResult
 import com.devcation.agtm.dataModel.user.SignUp
 import com.devcation.agtm.dataModel.DefaultResult
 import com.devcation.agtm.dataModel.like.LikeType
+import com.devcation.agtm.dataModel.reviews.Review
+import com.devcation.agtm.dataModel.reviews.ReviewResult
 import com.devcation.agtm.dataModel.wine.WineResult
 import com.devcation.agtm.dataModel.wine.WineDetailResult
 import com.devcation.agtm.dataModel.wine.WineReviewResult
@@ -23,20 +25,23 @@ import retrofit2.http.Query
 
 interface Api {
     //wine
-    @GET("api/v1/wine/") // 와인 목록 ?page=1
-    suspend fun getWine(@Query("page") page: Int) : List<WineResult>
+    @GET("api/v1/wine/@{username}") // 와인 목록 ?page=1
+    suspend fun getWine(@Query("page") page: Int, @Path("username") username:String) : List<WineResult>
 
-    @GET("api/v1/wine/type/@{type}") // 와인 종류별 목록
-    suspend fun getWineType(@Path("type") type:String, @Query("page") page: Int) : List<WineResult>
+    @GET("api/v1/wine/type/@{type}/@{username}") // 와인 종류별 목록
+    suspend fun getWineType(@Path("type") type:String, @Path("username") username:String, @Query("page") page: Int) : List<WineResult>
 
-    @GET("api/v1/wine/re/@{recommand}") // 와인 종류별 목록
-    suspend fun getWineRecommand(@Path("recommand") recommand:String, @Query("page") page: Int) : List<WineResult>
+    @GET("api/v1/wine/re/@{recommand}/@{username}") // 와인 종류별 목록
+    suspend fun getWineRecommand(@Path("username") username:String, @Path("recommand") recommand:String,  @Query("page") page: Int) : List<WineResult>
 
-    @GET("api/v1/wine/{id}") // 와인 상세
-    suspend fun getWineDetail(@Path("id") id:Int) : WineDetailResult
+    @GET("api/v1/wine/{id}/@{username}") // 와인 상세
+    suspend fun getWineDetail(@Path("id") id:Int, @Path("username") username:String) : WineDetailResult
 
-    @GET("api/v1/wine/{id}/reviews") // 와인 상세, 와인리뷰
-    suspend fun getWineReviews(@Path("id") id:Int, @Query("page") page: Int) : List<WineReviewResult>
+    @GET("api/v1/wine/{id}/reviews/@{username}") // 와인 상세, 와인리뷰
+    suspend fun getWineReviews(@Path("id") id:Int, @Path("username") username:String, @Query("page") page: Int) : MutableList<ReviewResult>
+
+    @POST("api/v1/wine/{id}/reviews/@{username}") // 와인 상세, 와인리뷰
+    suspend fun wineReviews(@Path("id") id:Int, @Path("username") username:String, @Query("page") page: Int, @Body param: Review) : ReviewResult
 
 
     //users
@@ -65,7 +70,14 @@ interface Api {
     @GET("api/v1/users/@{username}/likes/class") // 사용자 좋아요
     suspend fun getUserClassLikes(@Path("username") username:String, @Query("page") page: Int) : List<LikesClassResult>
 
-    //users - like클래스목록
+    //users - order
+    //users - like
+    @GET("api/v1/users/@{username}/order/wine") // 장바구니 와인
+    suspend fun getUserWineOrder(@Path("username") username:String, @Query("page") page: Int) : List<LikesWineResult>
+
+    @GET("api/v1/users/@{username}/order/class") // 장바구니 클래스
+    suspend fun getUserClassOrder(@Path("username") username:String, @Query("page") page: Int) : List<LikesClassResult>
+
 
     @POST("api/v1/like/class/{id}/@{username}") // 토글 클래스
     suspend fun getAgtmClassLikeToggle(@Path("username") username:String, @Path("id") id:Int, @Body param : LikeType) : DefaultResult
@@ -74,11 +86,19 @@ interface Api {
     suspend fun getWineLikeToggle(@Path("username") username:String, @Path("id") id:Int, @Body param : LikeType) : DefaultResult
 
     //Class
-    @GET("api/v1/class")
-    suspend fun getAgtmClass(@Query("page") page: Int) : List<AgtmClassResult>
+    @GET("api/v1/class/@{username}")
+    suspend fun getAgtmClass(@Path("username") username:String, @Query("page") page: Int) : List<AgtmClassResult>
 
-    @GET("api/v1/class/{id}")
-    suspend fun getAgtmClassDetail(@Path("id") id:Int) : AgtmClassDetailResult
+    @GET("api/v1/class/{id}/@{username}")
+    suspend fun getAgtmClassDetail(@Path("id") id:Int, @Path("username") username:String) : AgtmClassDetailResult
+
+
+    @GET("api/v1/class/{id}/reviews/@{username}") //클래스 상세 리뷰
+    suspend fun getAgtmClassReviews(@Path("id") id:Int, @Path("username") username:String, @Query("page") page: Int) : MutableList<ReviewResult>
+
+    @POST("api/v1/class/{id}/reviews/@{username}") // 클래스 상세 리뷰
+    suspend fun agtmClassReviews(@Path("id") id:Int, @Path("username") username:String, @Query("page") page: Int, @Body param: Review) : ReviewResult
+
 
     //Notice
 //    Noti = ("1", "Noti")

@@ -1,8 +1,12 @@
 package com.devcation.agtm.view.main
 
+import android.content.Intent
+import android.content.res.ColorStateList
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.Observer
 
 import com.devcation.agtm.R
@@ -11,10 +15,17 @@ import com.devcation.agtm.databinding.ActivityWineDetailBinding
 import com.devcation.agtm.viewModel.MainViewModel
 
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.devcation.agtm.common.UserManager
+import com.devcation.agtm.dataModel.like.LikeType
 import com.devcation.agtm.dataModel.wine.WineDetailResult
 import com.devcation.agtm.dataModel.wine.WineReviewResult
+import com.devcation.agtm.view.adapter.ReviewListAdapter
+import com.devcation.agtm.view.adapter.WineListVPAdapter
+import com.devcation.agtm.view.adapter.WineTypeGridAdapter
 import java.text.DecimalFormat
 
 
@@ -26,7 +37,10 @@ class WineDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        var pk = 0
+        var isLike = false
 
+        var username = UserManager.getInstance(applicationContext).userName
 
         binding = ActivityWineDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -34,7 +48,7 @@ class WineDetailActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
 
-        viewModel.getWineDetail(intent.getIntExtra("pk", 0))
+        viewModel.getWineDetail(username,intent.getIntExtra("pk", 0))
         viewModel.liveWineDetail.observe(this) {
 
             Glide.with(this)
@@ -94,9 +108,51 @@ class WineDetailActivity : AppCompatActivity() {
             val dec = DecimalFormat("#,###")
             binding.mainWineCost.text = dec.format(it.price)
 
+            pk = it.id
+//            viewModel.getWineReviews(it.id,"devcation", 1)
+            isLike = it.is_liked
+            if( it.is_liked ){
+                binding.wineDetailLike.setColorFilter(resources.getColor(R.color.icon_pink))
+            }else{
+                binding.wineDetailLike.setColorFilter(resources.getColor(R.color.icon_gray))
+            }
+
         }
 
 
-    }
+//        viewModel.liveWineReviews.observe(this) {
+//
+//            val reviewListAdapter = ReviewListAdapter(this, it)
+//            binding.WineReviewsRecycler.adapter =reviewListAdapter
+//            binding.WineReviewsRecycler.layoutManager = LinearLayoutManager(applicationContext, LinearLayoutManager.VERTICAL, false)
+//        }
 
+
+        binding.wineDetailReply.setOnClickListener(){
+            val intent = Intent(this, WineReplyActivity::class.java)
+            intent.putExtra("pk",pk)
+            startActivity(intent)
+        }
+
+
+        binding.wineDetailLike.setOnClickListener(){
+
+            if( isLike ){
+                isLike = false
+                binding.wineDetailLike.setColorFilter(resources.getColor(R.color.icon_gray))
+            }else{
+                isLike = true
+                binding.wineDetailLike.setColorFilter(resources.getColor(R.color.icon_pink))
+
+            }
+
+            var type : LikeType
+            type = LikeType("LIKE")
+
+            viewModel.getWineLikeToggle(username,pk, type)
+        }
+
+
+
+    }
 }

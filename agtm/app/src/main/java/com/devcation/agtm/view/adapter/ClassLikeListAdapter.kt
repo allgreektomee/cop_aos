@@ -11,10 +11,11 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.devcation.agtm.R
 import com.devcation.agtm.dataModel.agtmClass.AgtmClassResult
+import com.devcation.agtm.dataModel.like.LikesClassResult
 import java.text.DecimalFormat
 
 
-class ClassListAdapter (val context: Context, var dataSet: List<AgtmClassResult>) : RecyclerView.Adapter<ClassListAdapter.ViewHolder>(){
+class ClassLikeListAdapter (val context: Context, var dataSet: List<LikesClassResult>) : RecyclerView.Adapter<ClassLikeListAdapter.ViewHolder>(){
 
 
 
@@ -45,36 +46,29 @@ class ClassListAdapter (val context: Context, var dataSet: List<AgtmClassResult>
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        holder.classTitle.text = dataSet[position].title
+        holder.classTitle.text = dataSet[position].agtmclass.title
 
 
 
         Glide.with(context)
-            .load(dataSet[position].photos[0].file)
+            .load(dataSet[position].agtmclass.photos[0].file)
             .skipMemoryCache(true)
             .diskCacheStrategy(DiskCacheStrategy.NONE)
             .into(holder.classImg)
 
 
-        holder.classSubtitle.text = dataSet[position].subtitle
-        holder.classPlace.text = dataSet[position].place
+        holder.classSubtitle.text = dataSet[position].agtmclass.subtitle
+        holder.classPlace.text = dataSet[position].agtmclass.place
 
         val dec = DecimalFormat("#,###")
 
-        holder.classEtc.text =  dataSet[position].start +" - "+ dataSet[position].end+ "  "+dec.format( dataSet[position].price)+"원"
+        holder.classEtc.text =  dataSet[position].agtmclass.start +" - "+ dataSet[position].agtmclass.end+ "  "+dec.format( dataSet[position].agtmclass.price)+"원"
 
         holder.itemView.setOnClickListener{ v ->
-            itemClick?.onClick(v, dataSet[position].pk)
+            itemClick?.onClick(v, dataSet[position].agtmclass.pk)
         }
 
-        if(  dataSet[position].is_liked ){
-
-            holder.classLike.setColorFilter(context.getColor(R.color.icon_pink))
-        }else{
-
-            holder.classLike.setColorFilter(context.getColor(R.color.icon_gray))
-
-        }
+        holder.classLike.setColorFilter(context.getColor(R.color.icon_pink))
     }
 
     override fun getItemCount(): Int {

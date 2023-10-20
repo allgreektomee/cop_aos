@@ -16,6 +16,12 @@
         android:theme="@style/Theme.Agtm"
         tools:targetApi="31">
         <activity
+            android:name=".view.main.WineReplyActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.notice.ClassReplyActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.notice.ClassDetailActivity"
             android:exported="false" />
         <activity

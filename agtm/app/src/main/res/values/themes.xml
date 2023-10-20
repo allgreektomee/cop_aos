@@ -17,8 +17,8 @@
     </style>
 
     <style name="Theme.Agtm.Splash" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/purple_200</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/splach_icon</item>
+        <item name="windowSplashScreenBackground">@color/background</item>
+        <item name="windowSplashScreenAnimatedIcon">@color/background</item>
         <item name="postSplashScreenTheme">@style/Theme.Agtm</item>
     </style>
 </resources>

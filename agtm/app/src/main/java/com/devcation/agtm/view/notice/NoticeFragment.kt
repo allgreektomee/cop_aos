@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.devcation.agtm.R
 import com.devcation.agtm.common.RecyclerViewDecoration
+import com.devcation.agtm.common.UserManager
 import com.devcation.agtm.databinding.FragmentNoticeBinding
 import com.devcation.agtm.view.adapter.ClassListAdapter
 import com.devcation.agtm.view.adapter.NoticeListAdapter
@@ -71,7 +72,7 @@ class NoticeFragment : Fragment() {
         })
 
         //class
-        classViewModel.getAgtmClass(1)
+        classViewModel.getAgtmClass(UserManager.getInstance(requireContext()).userName, 1)
         binding.classListRecycler.addItemDecoration(RecyclerViewDecoration(0,20))
         binding.classListRecycler.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         classViewModel.liveClassList.observe(viewLifecycleOwner, Observer {

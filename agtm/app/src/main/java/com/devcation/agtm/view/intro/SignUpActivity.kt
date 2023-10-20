@@ -27,9 +27,14 @@ class SignUpActivity : AppCompatActivity() {
 
 
 
+
         binding.signup.setOnClickListener {
 
-            signupData = SignUp(email = "test1@gmail.com", username = "test112", password = "qweqwe1212",password2 = "qweqwe1212")
+            signupData = SignUp(
+                email = binding.editTextTextEmailAddress.text.toString(),
+                username = binding.editTextText2.text.toString(),
+                password = binding.editTextTextPassword2.text.toString(),
+                password2 = binding.editTextTextPassword3.text.toString())
 
 
             viewModel.signup(signupData)

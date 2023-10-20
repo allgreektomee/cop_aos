@@ -6,6 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.devcation.agtm.dataModel.like.LikeType
+import com.devcation.agtm.dataModel.reviews.Review
+import com.devcation.agtm.dataModel.reviews.ReviewResult
 import com.devcation.agtm.dataModel.user.SignIn
 import com.devcation.agtm.dataModel.user.SignUp
 import com.devcation.agtm.dataModel.wine.WineResult
@@ -46,22 +48,26 @@ class MainViewModel : ViewModel() {
         get() = _mutableWineDetail
 
 
-    private var _mutableWineList3 = MutableLiveData<List<WineReviewResult>>()
-    val liveWineList3 : LiveData<List<WineReviewResult>>
-        get() = _mutableWineList3
+    private var _mutableWineReviews = MutableLiveData<MutableList<ReviewResult>?>()
+    val liveWineReviews : MutableLiveData<MutableList<ReviewResult>?>
+        get() = _mutableWineReviews
 
 
-    fun getWine(page : Int) = viewModelScope.launch {
-        val getWine = netWorkRepository.getWine(page)
+
+    fun getWine(page : Int, username:String) = viewModelScope.launch {
+        val getWine = netWorkRepository.getWine(page, username)
         Log.d("MainViewModel", getWine.toString())
 
         Log.d("MainViewModel", getWine[0].country.get("name").toString() )
         _mutableWineList.value = getWine
+
+
     }
 
-    fun getWineRecommand(recommand: String, page : Int) = viewModelScope.launch {
-        val getWine = netWorkRepository.getWineRecommand(recommand,page)
-        Log.d("MainViewModel", getWine.toString())
+    fun getWineRecommand(username:String, recommand: String, page : Int) = viewModelScope.launch {
+
+        val getWine = netWorkRepository.getWineRecommand(username, recommand, page)
+        Log.d("getWineRecommand", getWine.toString())
 
         when (recommand) {
             "agtm" -> _mutableWineList_recommad_1.value = getWine
@@ -72,22 +78,30 @@ class MainViewModel : ViewModel() {
     }
 
 
-    fun getWineDetail(id : Int) = viewModelScope.launch{
-        val wine = netWorkRepository.getWineDetail(id)
+    fun getWineDetail(username:String, id : Int) = viewModelScope.launch{
+        val wine = netWorkRepository.getWineDetail(username,id)
 
         _mutableWineDetail.value = wine
     }
 
 
 
-    fun getWineReviews(id: Int, page: Int)  = viewModelScope.launch{
-        val reviews = netWorkRepository.getWineReviews(id, page)
-        Log.d("MainViewModel", reviews.toString())
-        Log.d("MainViewModel", reviews[0].user.username)
-        Log.d("MainViewModel", reviews[0].comment)
+    fun getWineReviews( id: Int, username:String, page: Int)  = viewModelScope.launch{
+        val reviews = netWorkRepository.getWineReviews( id, username, page)
 
-//        Log.d("getWineDetail", wine.country.get("name").toString() )
-        _mutableWineList3.value = reviews
+        Log.d("getWineReviews", reviews.toString())
+        _mutableWineReviews.value = reviews
+    }
+
+    fun wineReviews( id: Int, username:String, page: Int, review: Review)  = viewModelScope.launch{
+        val reviewResult = netWorkRepository.wineReviews( id, username, page, review)
+
+        var tempList= _mutableWineReviews.value
+        if (tempList != null) {
+            tempList.add(reviewResult)
+        }
+        _mutableWineReviews.value = tempList
+
     }
 
     fun getWineLikeToggle(username:String, id: Int, type: LikeType) = viewModelScope.launch{

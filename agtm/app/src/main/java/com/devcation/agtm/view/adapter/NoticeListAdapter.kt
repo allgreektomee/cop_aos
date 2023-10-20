@@ -47,13 +47,15 @@ class NoticeListAdapter(val context: Context, var dataSet: List<NoticeResult>) :
 
         holder.notiTitle.text = dataSet[position].name
 
-
-
-        Glide.with(context)
-            .load(dataSet[position].photos[0].file)
-            .skipMemoryCache(true)
-            .diskCacheStrategy(DiskCacheStrategy.NONE)
-            .into(holder.notiImg)
+        for (photo in dataSet[position].photos){
+            if (photo.description == "notice"){
+                Glide.with(context)
+                    .load(photo.file)
+                    .skipMemoryCache(true)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .into(holder.notiImg)
+            }
+        }
 
 
         holder.notiType.text = notiTypes[dataSet[position].type.toInt()]

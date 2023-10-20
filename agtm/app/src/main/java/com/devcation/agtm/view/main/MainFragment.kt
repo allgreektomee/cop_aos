@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.devcation.agtm.R
 import com.devcation.agtm.common.RecyclerViewDecoration
+import com.devcation.agtm.common.UserManager
 import com.devcation.agtm.dataModel.like.LikeType
 import com.devcation.agtm.databinding.FragmentMainBinding
 import com.devcation.agtm.view.adapter.WineListVPAdapter
@@ -53,15 +54,21 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        userViewModel.me("devcation")
+
 //
 //        userViewModel.getUserWineReviews("devcation",1)
 
 
 
-        viewModel.getWineLikeToggle("devcation",1, LikeType("LIKE"))
+//        viewModel.getWineLikeToggle("devcation",1, LikeType("LIKE"))
 
-        viewModel.getWineRecommand("agtm",1)
+        var username = UserManager.getInstance(requireContext()).userName
+        userViewModel.me(username)
+        userViewModel.liveUserData.observe(viewLifecycleOwner, Observer {
+            UserManager.getInstance(requireContext()).me = it
+        })
+
+        viewModel.getWineRecommand(username,"agtm",1)
         viewModel.liveWineList_recommand_1.observe(viewLifecycleOwner, Observer {
             val wineListRVAdapter = WineListVPAdapter(requireContext(), it)
 
@@ -83,7 +90,7 @@ class MainFragment : Fragment() {
 
 
 
-        viewModel.getWineRecommand("pick",1)
+        viewModel.getWineRecommand(username,"pick",1)
         viewModel.liveWineList_recommand_2.observe(viewLifecycleOwner, Observer {
             val wineListRVAdapter = WineListVPAdapter(requireContext(), it)
             binding.wineListRecycler2.adapter = wineListRVAdapter
@@ -101,7 +108,7 @@ class MainFragment : Fragment() {
 
         })
 
-        viewModel.getWineRecommand("month",1)
+        viewModel.getWineRecommand(username,"month",1)
         viewModel.liveWineList_recommand_3.observe(viewLifecycleOwner, Observer {
             val wineListRVAdapter = WineListVPAdapter(requireContext(), it)
             binding.wineListRecycler3.adapter = wineListRVAdapter

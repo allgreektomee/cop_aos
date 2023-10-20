@@ -2,6 +2,7 @@ package com.devcation.agtm.dataModel.like
 
 import com.devcation.agtm.dataModel.OwnerResult
 import com.devcation.agtm.dataModel.PhotoResult
+import com.devcation.agtm.dataModel.wine.dto
 
 data class LikesWineResult (
 
@@ -10,7 +11,7 @@ data class LikesWineResult (
     val type :String,
 
     val user :OwnerResult,
-    val wine : List<likeWine>
+    val wine : likeWine
 )
 
 data class LikesClassResult (
@@ -21,7 +22,7 @@ data class LikesClassResult (
 
     val user :OwnerResult,
 
-    val agtmclass : List<likeClass>
+    val agtmclass : likeClass
 )
 
 
@@ -31,13 +32,17 @@ data class likeWine (
     val name_en :String,
     val type :String,
     val price :Int,
-    val photos :List<PhotoResult>
+    val photos :List<PhotoResult>,
+    var country : dto
 )
-
 data class likeClass (
     val pk : Int,
     val title :String,
     val subtitle :String,
     val price :Int,
-    val photos :List<PhotoResult>
+    val photos :List<PhotoResult>,
+    val place:String,
+    var start:String,
+    var end:String
 )
+

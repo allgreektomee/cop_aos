@@ -1,11 +1,14 @@
 package com.devcation.agtm.common
 
 import android.content.Context
+import com.devcation.agtm.dataModel.user.MeResult
 
 class UserManager private constructor(context: Context) {
 
-    var userName: String = ""
-    var userPw: String = ""
+    var userName: String = "woori"
+    var userPw: String = "dnfl12!@"
+
+    lateinit var me: MeResult
 
     companion object {
         @Volatile

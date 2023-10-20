@@ -41,8 +41,8 @@ class WineTypeViewModel: ViewModel() {
 
 
 
-    fun getWineType(type: String, page : Int) = viewModelScope.launch {
-        val getWineType = netWorkRepository.getWineType(type, page)
+    fun getWineType( type: String, username:String, page : Int) = viewModelScope.launch {
+        val getWineType = netWorkRepository.getWineType( type,username, page)
         Log.d("WINETYPE",getWineType.toString())
         when (type) {
             "red" -> _mutableWineType_red.value = getWineType

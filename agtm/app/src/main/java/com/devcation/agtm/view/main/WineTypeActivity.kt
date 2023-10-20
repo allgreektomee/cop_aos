@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.devcation.agtm.common.RecyclerViewDecoration
+import com.devcation.agtm.common.UserManager
 import com.devcation.agtm.databinding.ActivityWineTypeBinding
 import com.devcation.agtm.view.adapter.WineListVPAdapter
 import com.devcation.agtm.view.adapter.WineTypeGridAdapter
@@ -28,13 +29,15 @@ class WineTypeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        var username = UserManager.getInstance(applicationContext).userName
+
         binding = ActivityWineTypeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         viewModel = ViewModelProvider(this).get(WineTypeViewModel::class.java)
 
 
-        viewModel.getWineType(wineTypes_str[intent.getIntExtra("type", 0)],1)
+        viewModel.getWineType( wineTypes_str[intent.getIntExtra("type", 0)], username,1)
 
         //
         binding.recycleviewWineType.layoutManager = GridLayoutManager(applicationContext ,2)
@@ -164,6 +167,6 @@ class WineTypeActivity : AppCompatActivity() {
     }
 
     fun reqWineType(type:Int){
-        viewModel.getWineType(wineTypes_str[type],1)
+        viewModel.getWineType("devcation",wineTypes_str[type],1)
     }
 }

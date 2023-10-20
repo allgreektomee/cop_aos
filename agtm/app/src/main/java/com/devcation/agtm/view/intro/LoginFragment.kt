@@ -46,26 +46,27 @@ class LoginFragment : Fragment() {
 
 
 
-        binding.nextBtn.setOnClickListener {
+        binding.btnSignUP.setOnClickListener {
             val intent = Intent(requireContext(), SignUpActivity::class.java)
             startActivity(intent)
         }
 
-        binding.loginBtn.setOnClickListener{
+        binding.btnSignIN.setOnClickListener{
+            var username =  binding.editTextText.text.toString()
 
-            signInData = SignIn("devcation", "qweasd12!@")
+            if (username != ""){
+                UserManager.getInstance(requireContext()).userName = username
+                UserManager.getInstance(requireContext()).userPw =  binding.editTextTextPassword.text.toString()
+            }
 
+
+            signInData = SignIn(UserManager.getInstance(requireContext()).userName, UserManager.getInstance(requireContext()).userPw)
 
             viewModel.login(signInData)
-
             viewModel.liveSign.observe(viewLifecycleOwner, Observer  {
                 if( it.ok == "0000") {
-
                     val intent = Intent(requireContext(), MainActivity::class.java)
                     startActivity(intent)
-
-
-
                 }
             })
         }

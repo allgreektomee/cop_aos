@@ -41,11 +41,18 @@ class NoticeDetailActivity : AppCompatActivity() {
             binding.noticeNameEn.text =it.name_en
             binding.noticeDes.text = it.description
 
-            Glide.with(this)
-                .load(it.photos[0].file)
-                .skipMemoryCache(true)
-                .diskCacheStrategy(DiskCacheStrategy.NONE)
-                .into(binding.noticeDetailImg)
+
+
+            for (photo in it.photos){
+                if (photo.description == "notice"){
+                    Glide.with(this)
+                        .load(photo.file)
+                        .skipMemoryCache(true)
+                        .diskCacheStrategy(DiskCacheStrategy.NONE)
+                        .into(binding.noticeDetailImg)
+                }
+            }
+
 
             binding.noticeName.text = it.name
             binding.noticeNameEn.text =it.name_en
@@ -54,19 +61,19 @@ class NoticeDetailActivity : AppCompatActivity() {
 
 
             Glide.with(this)
-                .load(it.photos[1].file)
+                .load(it.photos[0].file)
                 .skipMemoryCache(true)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .into(binding.noticeSubImg1)
 
             Glide.with(this)
-                .load(it.photos[2].file)
+                .load(it.photos[1].file)
                 .skipMemoryCache(true)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .into(binding.noticeSubImg2)
 
             Glide.with(this)
-                .load(it.photos[3].file)
+                .load(it.photos[2].file)
                 .skipMemoryCache(true)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .into(binding.noticeSubImg3)
