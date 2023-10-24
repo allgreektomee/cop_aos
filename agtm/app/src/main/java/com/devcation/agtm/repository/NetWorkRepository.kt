@@ -35,9 +35,9 @@ class NetWorkRepository {
 
     suspend fun getUserClassLikes(username: String, page: Int) = client.getUserClassLikes(username, page)
 
-    suspend fun getUserWineOrder(username: String, page: Int) = client.getUserWineLikes(username, page)
+    suspend fun getUserWineOrder(username: String, page: Int) = client.getUserWineOrder(username, page)
 
-    suspend fun getUserClassOrder(username: String, page: Int) = client.getUserClassLikes(username, page)
+    suspend fun getUserClassOrder(username: String, page: Int) = client.getUserClassOrder(username, page)
 
 
     suspend fun getAgtmClass(username: String, page: Int) = client.getAgtmClass(username, page)

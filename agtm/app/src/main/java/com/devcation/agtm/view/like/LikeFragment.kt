@@ -90,7 +90,44 @@ class LikeFragment : Fragment() {
 
         })
 
+        viewModel.liveOrderWine.observe(viewLifecycleOwner, Observer {
+            val wineLikeListVPAdapter = WineLikeListVPAdapter(requireContext(), it)
+            binding.LikeListRecycle.adapter = wineLikeListVPAdapter
+            binding.LikeListRecycle.layoutManager = GridLayoutManager(requireContext() ,2)
+
+
+//            binding.wineListRecycler2.addItemDecoration(RecyclerViewDecoration(20,0))
+
+            wineLikeListVPAdapter.itemClick = object : WineLikeListVPAdapter.ItemClick {
+                override fun onClick(view: View, pk: Int) {
+
+                    val intent = Intent(requireContext(), WineDetailActivity::class.java)
+                    intent.putExtra("pk",pk)
+                    startActivity(intent)
+                }
+            }
+
+
+        })
+
         viewModel.liveLikeClass.observe(viewLifecycleOwner, Observer {
+            val classLikeListAdapter = ClassLikeListAdapter(requireContext(), it)
+            binding.LikeListRecycle.adapter = classLikeListAdapter
+            binding.LikeListRecycle.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+
+
+            classLikeListAdapter.itemClick = object : ClassLikeListAdapter.ItemClick {
+                override fun onClick(view: View, pk: Int) {
+
+                    val intent = Intent(requireContext(), WineDetailActivity::class.java)
+                    intent.putExtra("pk",pk)
+                    startActivity(intent)
+                }
+            }
+
+        })
+
+        viewModel.liveOrderClass.observe(viewLifecycleOwner, Observer {
             val classLikeListAdapter = ClassLikeListAdapter(requireContext(), it)
             binding.LikeListRecycle.adapter = classLikeListAdapter
             binding.LikeListRecycle.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
@@ -111,11 +148,20 @@ class LikeFragment : Fragment() {
 
         binding.btnLike.setOnClickListener(){
             isLike = true
+            isWine = true
+
+            viewModel.getUserWineLikes(username,1)
+
             wishTitleSetting()
+
         }
 
         binding.btnOrder.setOnClickListener(){
             isLike = false
+            isWine = true
+
+            viewModel.getUserWineOrder(username,1)
+
             wishTitleSetting()
         }
 
@@ -123,7 +169,12 @@ class LikeFragment : Fragment() {
             isWine = true
             wishTitleSetting()
 
-            viewModel.getUserWineLikes(username,1)
+            if(isLike){
+                viewModel.getUserWineLikes(username,1)
+            }else{
+                viewModel.getUserWineOrder(username,1)
+            }
+
 
 
         }
@@ -132,7 +183,12 @@ class LikeFragment : Fragment() {
             isWine = false
             wishTitleSetting()
 
-            viewModel.getUserClassLikes(username,1)
+            if(isLike){
+                viewModel.getUserClassLikes(username,1)
+            }else{
+                viewModel.getUserClassOrder(username,1)
+            }
+
 
 
 
